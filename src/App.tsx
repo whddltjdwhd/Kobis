@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 interface User {
@@ -8,21 +9,12 @@ interface User {
 function App() {
   const [users, setUsers] = useState<User[]>([]);
 
+  const getUser = async () => {
+    axios.get<User[]>('/user').then(res => setUsers(res.data));
+  };
   useEffect(() => {
-    async function fetchUsers() {
-      try {
-        const response = await fetch('/user'); // 서버 URL 확인
-        const data: User[] = await response.json();
-
-        setUsers(data);
-      } catch (error) {
-        console.error('Error fetching users:', error);
-      }
-    }
-
-    fetchUsers();
+    getUser();
   }, []);
-
   return (
     <div className="App">
       <h1>Users</h1>
