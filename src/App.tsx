@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import LoadingSpinner from './LoadingSpinner';
 import Pagination from 'react-js-pagination';
 import './Pagination.css';
+import { styled } from 'styled-components';
 
 interface Movie {
   id: number;
@@ -17,6 +18,15 @@ interface Movie {
   company?: string;
   enterDate?: Date;
 }
+
+const MainContainer = styled.div`
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
 
 function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -60,7 +70,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <MainContainer>
       <h1>Movies</h1>
       <table>
         <colgroup>
@@ -96,7 +106,7 @@ function App() {
         nextPageText={'>'}
         onChange={pageChangeHandler}
       />
-    </div>
+    </MainContainer>
   );
 }
 
