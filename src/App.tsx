@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import LoadingSpinner from './LoadingSpinner';
 import Pagination from 'react-js-pagination';
 import './Pagination.css';
-import { styled } from 'styled-components';
+import styled from 'styled-components';
 
 interface Movie {
   id: number;
@@ -26,6 +26,40 @@ const MainContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  table {
+    width: 80%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    tr:hover {
+      background-color: #ddd;
+    }
+  }
+`;
+
+const StyledPagination = styled(Pagination)`
+  margin-bottom: 2rem;
 `;
 
 function App() {
@@ -74,16 +108,16 @@ function App() {
       <h1>Movies</h1>
       <table>
         <colgroup>
-          <col width={'25%'} />
-          <col width={'50%'} />
-          <col width={'25%'} />
+          <col width="25%" />
+          <col width="50%" />
+          <col width="25%" />
         </colgroup>
 
         <thead>
           <tr>
             <th>ID</th>
             <th>Title</th>
-            <th>year</th>
+            <th>Year</th>
           </tr>
         </thead>
 
@@ -97,13 +131,13 @@ function App() {
           ))}
         </tbody>
       </table>
-      <Pagination
+      <StyledPagination
         activePage={currentPage}
         itemsCountPerPage={moviesPerPage}
         totalItemsCount={movies.length}
         pageRangeDisplayed={10}
-        prevPageText={'<'}
-        nextPageText={'>'}
+        prevPageText="<"
+        nextPageText=">"
         onChange={pageChangeHandler}
       />
     </MainContainer>
