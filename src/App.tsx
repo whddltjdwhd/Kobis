@@ -20,7 +20,7 @@ function App() {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const getMovies = async () => {
     try {
@@ -37,6 +37,37 @@ function App() {
     getMovies();
   }, []);
 
+  const onSubmit = async (data: Input) => {
+    try {
+      console.log(data);
+      const params = new URLSearchParams();
+
+      if (data.movieTitle) {
+        params.append('movieTitle', data.movieTitle);
+      }
+      if (data.directorName) {
+        params.append('directorName', data.directorName);
+      }
+      if (data.fromDate) {
+        params.append('fromDate', data.fromDate.toString());
+      }
+      if (data.toDate) {
+        params.append('toDate', data.toDate.toString());
+      }
+
+      const response = await axios.get<Movie[]>(
+        `/search-movies?${params.toString()}`,
+      );
+      // console.log(response.data);
+      setMovies(response.data);
+      reset();
+    } catch (error) {
+      setError('Failed to search movies');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (loading) {
     return <LoadingSpinner />;
   }
@@ -47,11 +78,7 @@ function App() {
 
   return (
     <MainContainer>
-      <form
-        onSubmit={handleSubmit((data: Input) => {
-          console.log(data);
-        })}
-      >
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label>Movie Title</label>
           <input type="text" {...register('movieTitle')} />
@@ -68,7 +95,7 @@ function App() {
           <label>toDate</label>
           <input type="date" {...register('toDate')} />
         </div>
-        <button>검색</button>
+        <button type="submit">검색</button>
       </form>
 
       <TableContents movieList={movies} />
