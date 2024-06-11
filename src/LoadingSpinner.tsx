@@ -19,21 +19,15 @@ const Overlay = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.79);
+  background-color: rgba(0, 0, 0, 0.9);
   opacity: 0.33;
   z-index: 9999;
-`;
-
-const Message = styled.div`
-  color: white;
-  margin-bottom: 20px;
 `;
 
 const LoadingSpinner = () => {
   return (
     <Overlay>
       <LoadingContainer>
-        <Message>잠시만 기다려주세요.</Message>
         <SyncLoader color="#ffffff" />
       </LoadingContainer>
     </Overlay>

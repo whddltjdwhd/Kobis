@@ -106,10 +106,12 @@ function App() {
         params.append('toYear', data.toYear.toString());
       }
 
+      setLoading(true);
       const response = await axios.get<Movie[]>(
         `/search-movies?${params.toString()}`,
       );
 
+      setLoading(false);
       setMovies(response.data);
       reset();
     } catch (error) {
@@ -119,16 +121,13 @@ function App() {
     }
   };
 
-  if (loading) {
-    return <LoadingSpinner />;
-  }
-
   if (error) {
     return <div>{error}</div>;
   }
 
   return (
     <MainContainer>
+      {loading && <LoadingSpinner />}
       <FormContainer onSubmit={handleSubmit(onSubmit)}>
         <FormGroup>
           <Label>Movie Title</Label>
