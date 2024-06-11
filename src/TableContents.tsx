@@ -67,7 +67,7 @@ function TableContents({ movieList }: TableContentsProps) {
 
   return (
     <MainContainer>
-      <h1>Movies</h1>
+      <h1>Movies {movieList.length} 개 검색됨</h1>
       <table>
         <colgroup>
           <col width="25%" />
@@ -85,8 +85,8 @@ function TableContents({ movieList }: TableContentsProps) {
 
         <tbody>
           {currentMovies.map(movie => (
-            <tr key={movie.id}>
-              <td>{movie.id}</td>
+            <tr key={movie.movie_id}>
+              <td>{movie.movie_id}</td>
               <td>{movie.title}</td>
               <td>{movie.year}</td>
             </tr>

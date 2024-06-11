@@ -1,10 +1,10 @@
 import axios from 'axios';
 import LoadingSpinner from 'LoadingSpinner';
-import MovieForm from 'MovieForm';
 import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import TableContents from 'TableContents';
-import { Movie } from 'Types';
+import { Input, Movie } from 'Types';
 
 const MainContainer = styled.div`
   height: 100vh;
@@ -19,6 +19,8 @@ function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+
+  const { register, handleSubmit } = useForm();
 
   const getMovies = async () => {
     try {
@@ -45,7 +47,30 @@ function App() {
 
   return (
     <MainContainer>
-      <MovieForm />
+      <form
+        onSubmit={handleSubmit((data: Input) => {
+          console.log(data);
+        })}
+      >
+        <div>
+          <label>Movie Title</label>
+          <input type="text" {...register('movieTitle')} />
+        </div>
+        <div>
+          <label>Director Name</label>
+          <input type="text" {...register('directorName')} />
+        </div>
+        <div>
+          <label>fromDate</label>
+          <input type="date" {...register('fromDate')} />
+        </div>
+        <div>
+          <label>toDate</label>
+          <input type="date" {...register('toDate')} />
+        </div>
+        <button>검색</button>
+      </form>
+
       <TableContents movieList={movies} />
     </MainContainer>
   );

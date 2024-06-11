@@ -1,5 +1,5 @@
 export interface Movie {
-  id: number;
+  movie_id: number;
   title: string;
   engTitle?: string;
   year?: number;
@@ -10,4 +10,11 @@ export interface Movie {
   director: string;
   company?: string;
   enterDate?: Date;
+}
+
+export interface Input {
+  movieTitle?: string;
+  directorName?: string;
+  fromDate?: number;
+  toDate?: number;
 }
