@@ -1,26 +1,10 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import LoadingSpinner from './LoadingSpinner';
+import React, { useState } from 'react';
 import Pagination from 'react-js-pagination';
 import './Pagination.css';
 import styled from 'styled-components';
-
-interface Movie {
-  id: number;
-  title: string;
-  engTitle?: string;
-  year?: number;
-  country?: string;
-  mType?: string;
-  genre?: string;
-  status?: string;
-  director: string;
-  company?: string;
-  enterDate?: Date;
-}
+import { Movie } from 'Types';
 
 const MainContainer = styled.div`
-  height: 100vh;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -62,16 +46,17 @@ const StyledPagination = styled(Pagination)`
   margin-bottom: 2rem;
 `;
 
-function TableContents() {
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+interface TableContentsProps {
+  movieList: Movie[];
+}
+
+function TableContents({ movieList }: TableContentsProps) {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const moviesPerPage: number = 10;
   const indexOfLastMovie: number = currentPage * moviesPerPage;
   const indexOfFirstMovie: number = indexOfLastMovie - moviesPerPage;
-  const currentMovies: Movie[] = movies.slice(
+  const currentMovies: Movie[] = movieList.slice(
     indexOfFirstMovie,
     indexOfLastMovie,
   );
@@ -79,29 +64,6 @@ function TableContents() {
   const pageChangeHandler = (page: number) => {
     setCurrentPage(page);
   };
-
-  const getMovies = async () => {
-    try {
-      const response = await axios.get<Movie[]>('/movies');
-      setMovies(response.data);
-    } catch (error) {
-      setError('Failed to fetch movies');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getMovies();
-  }, []);
-
-  if (loading) {
-    return <LoadingSpinner />;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
 
   return (
     <MainContainer>
@@ -134,7 +96,7 @@ function TableContents() {
       <StyledPagination
         activePage={currentPage}
         itemsCountPerPage={moviesPerPage}
-        totalItemsCount={movies.length}
+        totalItemsCount={movieList.length}
         pageRangeDisplayed={10}
         prevPageText="<"
         nextPageText=">"
