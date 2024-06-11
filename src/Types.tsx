@@ -1,20 +1,19 @@
 export interface Movie {
   movie_id: number;
-  title: string;
-  engTitle?: string;
+  title?: string;
+  eng_title?: string;
   year?: number;
   country?: string;
-  mType?: string;
+  type?: string;
   genre?: string;
   status?: string;
-  director: string;
   company?: string;
-  enterDate?: Date;
+  director_name?: string;
 }
 
 export interface Input {
   movieTitle?: string;
   directorName?: string;
-  fromDate?: number;
-  toDate?: number;
+  fromYear?: number;
+  toYear?: number;
 }

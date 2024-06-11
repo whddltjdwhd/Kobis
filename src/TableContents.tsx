@@ -6,6 +6,7 @@ import { Movie } from 'Types';
 
 const MainContainer = styled.div`
   width: 100%;
+  heigh: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,7 +18,7 @@ const MainContainer = styled.div`
   }
 
   table {
-    width: 80%;
+    width: 100%;
     border-collapse: collapse;
     margin-bottom: 2rem;
 
@@ -42,9 +43,7 @@ const MainContainer = styled.div`
   }
 `;
 
-const StyledPagination = styled(Pagination)`
-  margin-bottom: 2rem;
-`;
+const StyledPagination = styled(Pagination)``;
 
 interface TableContentsProps {
   movieList: Movie[];
@@ -69,17 +68,20 @@ function TableContents({ movieList }: TableContentsProps) {
     <MainContainer>
       <h1>Movies {movieList.length} 개 검색됨</h1>
       <table>
-        <colgroup>
-          <col width="25%" />
-          <col width="50%" />
-          <col width="25%" />
-        </colgroup>
+        <colgroup></colgroup>
 
         <thead>
           <tr>
             <th>ID</th>
-            <th>Title</th>
-            <th>Year</th>
+            <th>제목</th>
+            <th>제목(영문)</th>
+            <th>제작연도</th>
+            <th>제작국가</th>
+            <th>유형</th>
+            <th>장르</th>
+            <th>제작상태</th>
+            <th>감독</th>
+            <th>제작사</th>
           </tr>
         </thead>
 
@@ -88,7 +90,14 @@ function TableContents({ movieList }: TableContentsProps) {
             <tr key={movie.movie_id}>
               <td>{movie.movie_id}</td>
               <td>{movie.title}</td>
+              <td>{movie.eng_title}</td>
               <td>{movie.year}</td>
+              <td>{movie.country}</td>
+              <td>{movie.type}</td>
+              <td>{movie.genre}</td>
+              <td>{movie.status}</td>
+              <td>{movie.director_name}</td>
+              <td>{movie.company}</td>
             </tr>
           ))}
         </tbody>
