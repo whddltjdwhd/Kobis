@@ -1,14 +1,14 @@
 export interface Movie {
-  movie_id: number;
+  id: number;
   title?: string;
   eng_title?: string;
   year?: number;
   country?: string;
-  type?: string;
+  m_type?: string;
   genre?: string;
   status?: string;
   company?: string;
-  director_name?: string;
+  name?: string;
 }
 
 export interface Input {

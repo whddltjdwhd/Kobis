@@ -68,7 +68,7 @@ function App() {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const yearArray: string[] = ['전체 선택'];
-  for (var i = 0; i <= 130; i++) {
+  for (let i = 0; i <= 130; i++) {
     yearArray.push((i + 1900).toString());
   }
   const { register, handleSubmit, reset } = useForm();
@@ -90,7 +90,6 @@ function App() {
 
   const onSubmit = async (data: Input) => {
     try {
-      console.log(data);
       const params = new URLSearchParams();
 
       if (data.movieTitle) {

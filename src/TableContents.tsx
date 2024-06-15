@@ -87,16 +87,16 @@ function TableContents({ movieList }: TableContentsProps) {
 
         <tbody>
           {currentMovies.map(movie => (
-            <tr key={movie.movie_id}>
-              <td>{movie.movie_id}</td>
+            <tr key={movie.id}>
+              <td>{movie.id}</td>
               <td>{movie.title}</td>
               <td>{movie.eng_title}</td>
               <td>{movie.year}</td>
               <td>{movie.country}</td>
-              <td>{movie.type}</td>
+              <td>{movie.m_type}</td>
               <td>{movie.genre}</td>
               <td>{movie.status}</td>
-              <td>{movie.director_name}</td>
+              <td>{movie.name}</td>
               <td>{movie.company}</td>
             </tr>
           ))}
