@@ -121,7 +121,7 @@ function App() {
   };
 
   if (error) {
-    return <div>{error}</div>;
+    return <h1>{error}</h1>;
   }
 
   return (
