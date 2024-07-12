@@ -121,7 +121,7 @@ function App() {
   };
 
   if (error) {
-    return <div>{error}</div>;
+    return <div>{error + '에러 발생!~'}</div>;
   }
 
   return (
